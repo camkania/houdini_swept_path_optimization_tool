@@ -1,12 +1,16 @@
 # houdini_swept_path_optimization_tool
  Tool to reduce the polycount of a series of combined static meshes.
 
+![Swept Path Tool in Action](screenshots/swept_path.png)
+*Fig 1: Screenshot of a orginal and optimized blobs overlayed in Houdini*
+ 
+
 ## High Level Functions of the tool
 - Convert a "blob" of static meshes into a voxelized singular mesh
 - Convert that "blob" back into geometry with a significant reduction in the # of polygons
 
 ## Background
-This tool was built to optimize the output of the [Snapshot tool](https://github.com/camkania/blender_snapshot_tool). Snapshot captures an animated ride or mechanism as a dense series of static meshes—one per sampled frame—which merge into a single "blob" describing the full swept-path envelope. That blob is accurate but very heavy (thousands of overlapping, self-intersecting surfaces). This tool rebuilds it as a clean, watertight, dramatically lighter mesh while preserving the true shape of the motion.
+This tool was built to optimize the output of the [Snapshot tool](https://github.com/camkania/blender_snapshot_tool). Snapshot captures a ride or mechanism's motion as a dense series of static meshes which merge into a single "blob" representing the full swept-path envelope. That blob is accurate but very heavy (thousands of overlapping, self-intersecting surfaces). This tool rebuilds it as a clean, watertight, dramatically lighter mesh while preserving the true shape of the motion.
 
 The original use case was representing the dynamic motion path of robotic ride systems in a way that is both accurate and efficient. The same pipeline has since been used to clean up and optimize engineering models for 3D printing.
 
@@ -17,7 +21,10 @@ The original use case was representing the dynamic motion path of robotic ride s
 - `houdini_files/OptimizeSweptPath.hipnc` — the tool.
 - `sample_animation/` — sample inputs, including `blender_sample_torus_anim_swept_path.obj` (a combined swept path exported from Blender) and the source `.blend` / `.fbx` files.
 
-## How to operate
+## Operation Guide
+
+![Node Tree](screenshots/nodes.png)
+*Fig 2: Screenshot of the node tree in Houdini*
 
 1. **Prepare your input.** Export the swept path—the combined static-mesh "blob"—from your DCC as a single geometry file (OBJ, FBX, or bgeo). If you use the Snapshot tool, this is the merged mesh it produces. A ready-made example lives in `sample_animation/blender_sample_torus_anim_swept_path.obj`.
 
